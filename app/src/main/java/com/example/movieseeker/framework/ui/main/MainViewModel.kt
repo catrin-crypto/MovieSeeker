@@ -11,15 +11,24 @@ class MainViewModel(private val repository: Repository) : ViewModel(),LifecycleO
 
     fun getLiveData() = liveDataToObserve
 
-    fun getMovie() = getDataFromMovieDB()
+    fun getMovieFromLocalSourceRus() = getDataFromLocalSource(isRussian = true)
 
-    private fun getDataFromMovieDB(){
+    fun getMovieFromLocalSourceWorld() = getDataFromLocalSource(isRussian = false)
+
+    private fun getDataFromLocalSource(isRussian: Boolean) {
         liveDataToObserve.value = AppState.Loading
-        Thread{
+        Thread {
             sleep(1000)
-            liveDataToObserve.postValue(AppState.Success(repository.getMovieFromServer()))
+            liveDataToObserve.postValue(
+                if(isRussian) {
+                    AppState.Success(repository.getMovieFromLocalStorageRus())
+                } else {
+                    AppState.Success(repository.getMovieFromLocalStorageWorld())
+                }
+            )
         }.start()
     }
+
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onViewStart(){

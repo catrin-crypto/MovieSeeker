@@ -7,49 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".framework.ui.main.MainFragment">
 
-
-    <TextView
-        android:id="@+id/movieName"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mainFragmentRecyclerView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="NoNameMovie_" />
-
-    <ImageView
-        android:id="@+id/movieImage"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@id/movieName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TextView
-        android:id="@+id/movieRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieImage"
-        tools:text="220" />
-
-    <TextView
-        android:id="@+id/creationYear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="production year"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieRating" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
+
+        <FrameLayout
+        android:id="@+id/mainFragmentLoadingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -61,15 +35,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    </FrameLayout>
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/movieGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:constraint_referenced_ids="movieName,movieImage,movieRating, creationYear" />
-
-    <LinearLayout
+     <LinearLayout
         android:id="@+id/button_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -113,8 +81,20 @@
             android:textSize="@dimen/button_text_size"
             app:layout_constraintStart_toEndOf="@id/favourites_button"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/mainFragmentFAB"
             />
+
+         <com.google.android.material.floatingactionbutton.FloatingActionButton
+             android:id="@+id/mainFragmentFAB"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginEnd="16dp"
+             android:layout_marginBottom="16dp"
+             android:tint="@color/black"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintStart_toEndOf="@id/ratings_button"
+             app:layout_constraintEnd_toEndOf="parent"
+             android:contentDescription="@string/change_movies_list_floating_button" />
 
     </LinearLayout>
 
