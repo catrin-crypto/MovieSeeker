@@ -29,7 +29,7 @@ class MovieDetailsFragment : Fragment() {
     private fun setData(movieData: Movie) = with(binding) {
         movieName.text = movieData.name
         moviePicture.setImageResource(R.drawable.the_movie_db)
-        movieRating.text = movieData.rating.format(2)
+        movieRating.text = movieData.rating.format(1)
         creationYear.text = movieData.creationDate.toString()
     }
 

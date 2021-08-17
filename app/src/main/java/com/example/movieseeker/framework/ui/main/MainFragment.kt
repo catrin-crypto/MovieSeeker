@@ -11,6 +11,7 @@ import com.example.movieseeker.R
 import com.example.movieseeker.databinding.MainFragmentBinding
 import com.example.movieseeker.framework.ui.MovieDetailsFragment
 import com.example.movieseeker.framework.ui.adapters.MainFragmentAdapter
+import com.example.movieseeker.framework.ui.showSnackBar
 import com.example.movieseeker.model.entities.Movie
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,6 +33,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         with(binding){
             mainFragmentRecyclerView.adapter = adapter
             mainFragmentFAB.setOnClickListener{changeMovieDataSet()}
@@ -84,10 +86,13 @@ class MainFragment : Fragment() {
             }
             is AppState.Error -> {
                 mainFragmentLoadingLayout.visibility = View.GONE
-               Snackbar
-                        .make(binding.mainFragmentFAB, "Ошибка!", Snackbar.LENGTH_INDEFINITE)
-                        .setAction("Обновить") { viewModel.getMovieFromLocalSourceRus() }
-                        .show()
+                main.showSnackBar(getString(R.string.snackbar_error),
+                        getString(R.string.snackbar_reload),
+                        { viewModel.getMovieFromLocalSourceRus() })
+//               Snackbar
+//                        .make(binding.mainFragmentFAB, R.string.snackbar_error, Snackbar.LENGTH_INDEFINITE)
+//                        .setAction(R.string.snackbar_update) { viewModel.getMovieFromLocalSourceRus() }
+//                        .show()
             }
         }
     }

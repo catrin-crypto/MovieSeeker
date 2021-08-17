@@ -8,4 +8,5 @@
     <dimen name="movie_details_textsize">10sp</dimen>
     <dimen name="image_width">1000dp</dimen>
     <dimen name="image_height">500dp</dimen>
+    <dimen name="fab_size">57dp</dimen>
 </resources>

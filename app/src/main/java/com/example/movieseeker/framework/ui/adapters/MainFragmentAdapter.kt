@@ -27,9 +27,8 @@ class MainFragmentAdapter(private var itemClickListener: MainFragment.OnItemView
         return MainViewHolder(binding.root)
     }
 
-    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MainViewHolder, position: Int) =
         holder.bind(movieData[position])
-    }
 
     override fun getItemCount() = movieData.size
 
