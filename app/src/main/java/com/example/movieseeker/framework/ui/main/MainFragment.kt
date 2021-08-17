@@ -2,12 +2,16 @@ package com.example.movieseeker.framework.ui.main
 
 
 import android.os.Bundle
+import android.telecom.Call
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.movieseeker.AppState
 import com.example.movieseeker.R
 import com.example.movieseeker.databinding.MainFragmentBinding
+import com.example.movieseeker.framework.ui.MovieDetailsFragment
+import com.example.movieseeker.framework.ui.adapters.MainFragmentAdapter
+import com.example.movieseeker.framework.ui.showSnackBar
 import com.example.movieseeker.model.entities.Movie
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -16,6 +20,9 @@ class MainFragment : Fragment() {
     private val viewModel : MainViewModel by viewModel()
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
+
+    private var adapter: MainFragmentAdapter? = null
+    private var isDataSetRus: Boolean = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -26,10 +33,14 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val observer = Observer<AppState> { renderData(it) }
-        viewLifecycleOwner.lifecycle.addObserver(viewModel)
-        viewModel.getLiveData().observe(viewLifecycleOwner, observer)
-        viewModel.getMovie()
+
+        with(binding){
+            mainFragmentRecyclerView.adapter = adapter
+            mainFragmentFAB.setOnClickListener{changeMovieDataSet()}
+            viewModel.getLiveData().observe(viewLifecycleOwner,{ renderData(it)})
+            viewModel.getMovieFromLocalSourceRus()
+        }
+
     }
 
     override fun onDestroyView() {
@@ -37,36 +48,57 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
+    private fun changeMovieDataSet() = with(binding) {
+        if (isDataSetRus) {
+            viewModel.getMovieFromLocalSourceWorld()
+            mainFragmentFAB.setImageResource(R.drawable.ic_earth)
+        } else {
+            viewModel.getMovieFromLocalSourceRus()
+            mainFragmentFAB.setImageResource(R.drawable.ic_russia)
+        }
+        isDataSetRus = !isDataSetRus
+    }
+
     private fun renderData(appState: AppState) = with(binding) {
         when (appState) {
             is AppState.Success -> {
-                val movieData = appState.movieData
-                progressBar.visibility = View.GONE
-                movieGroup.visibility = View.VISIBLE
-                setData(movieData)
+                mainFragmentLoadingLayout.visibility = View.GONE
+                adapter = MainFragmentAdapter(object: OnItemViewClickListener{
+                    override fun onItemViewClick(movie: Movie){
+                        val manager = activity?.supportFragmentManager
+                        manager?.let{manager ->
+                            val bundle = Bundle().apply{
+                                putParcelable(MovieDetailsFragment.BUNDLE_EXTRA,movie)
+                            }
+                            manager.beginTransaction()
+                                .add(R.id.container,MovieDetailsFragment.newInstance(bundle))
+                                .addToBackStack("")
+                                .commitAllowingStateLoss()
+                        }
+                    }
+                }).apply{
+                    setMovie(appState.movieData)
+                }
+                mainFragmentRecyclerView.adapter = adapter
             }
             is AppState.Loading -> {
-                movieGroup.visibility = View.INVISIBLE
-                progressBar.visibility = View.VISIBLE
+                mainFragmentLoadingLayout.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                progressBar.visibility = View.GONE
-                movieGroup.visibility = View.INVISIBLE
-                Snackbar
-                        .make(main, "Error", Snackbar.LENGTH_INDEFINITE)
-                        .setAction("Reload") { viewModel.getMovie() }
-                        .show()
+                mainFragmentLoadingLayout.visibility = View.GONE
+                main.showSnackBar(getString(R.string.snackbar_error),
+                        getString(R.string.snackbar_reload),
+                        { viewModel.getMovieFromLocalSourceRus() })
+//               Snackbar
+//                        .make(binding.mainFragmentFAB, R.string.snackbar_error, Snackbar.LENGTH_INDEFINITE)
+//                        .setAction(R.string.snackbar_update) { viewModel.getMovieFromLocalSourceRus() }
+//                        .show()
             }
         }
     }
 
-    fun Float.format(digits: Int) = "%.${digits}f".format(this)
-
-    private fun setData(movieData: Movie) = with(binding) {
-        movieName.text = movieData.name
-        movieImage.setImageResource(R.drawable.the_movie_db)
-        movieRating.text = movieData.rating.format(2)
-        creationYear.text = movieData.creationDate.toString()
+    interface OnItemViewClickListener {
+        fun onItemViewClick(movie: Movie)
     }
     companion object {
         fun newInstance() = MainFragment()
