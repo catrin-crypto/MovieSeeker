@@ -1,6 +1,6 @@
 package com.example.movieseeker.framework.ui.main
 
-import android.util.Log
+//import android.util.Log
 import androidx.lifecycle.*
 import com.example.movieseeker.AppState
 import com.example.movieseeker.model.repository.Repository
@@ -32,6 +32,6 @@ class MainViewModel(private val repository: Repository) : ViewModel(),LifecycleO
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onViewStart(){
-        Log.i("LifecycleEvent","onStart")
+       // Log.i("LifecycleEvent","onStart")
     }
 }

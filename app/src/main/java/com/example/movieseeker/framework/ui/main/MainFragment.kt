@@ -2,18 +2,15 @@ package com.example.movieseeker.framework.ui.main
 
 
 import android.os.Bundle
-import android.telecom.Call
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.example.movieseeker.AppState
 import com.example.movieseeker.R
 import com.example.movieseeker.databinding.MainFragmentBinding
-import com.example.movieseeker.framework.ui.MovieDetailsFragment
+import com.example.movieseeker.framework.ui.details.MovieDetailsFragment
 import com.example.movieseeker.framework.ui.adapters.MainFragmentAdapter
 import com.example.movieseeker.framework.ui.showSnackBar
 import com.example.movieseeker.model.entities.Movie
-import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
@@ -26,7 +23,7 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true)
         _binding = MainFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -71,7 +68,7 @@ class MainFragment : Fragment() {
                                 putParcelable(MovieDetailsFragment.BUNDLE_EXTRA,movie)
                             }
                             manager.beginTransaction()
-                                .add(R.id.container,MovieDetailsFragment.newInstance(bundle))
+                                .add(R.id.container, MovieDetailsFragment.newInstance(bundle))
                                 .addToBackStack("")
                                 .commitAllowingStateLoss()
                         }

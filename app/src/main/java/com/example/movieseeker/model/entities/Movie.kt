@@ -1,38 +1,40 @@
 package com.example.movieseeker.model.entities
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.media.Image
 import android.os.Parcelable
-import java.io.InputStream
 import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
+import java.net.URL
 
+const val LANGUAGE_DEFAULT = ""
+const val LANGUAGE_ENGLISH = "en"
+const val LANGUAGE_RUSSIAN = "ru"
 @Parcelize
-data class Movie (
-    val name : String = getDefaultName(),
-    val creationDate : Int = getDefaultDate(),
-    val rating : Float = 0.0F,
-    val picture : Bitmap? = null
+data class Movie(
+        val id: Int = -1,
+        val language: String = LANGUAGE_DEFAULT,
+        val name: String = getDefaultName(),
+        val creationDate: String? = null,
+        val rating: Float = 0.0F,
+        val picture: String? = null
+
 ): Parcelable
 
 fun getDefaultMovie() = Movie()
 
 fun getWorldMovies() = listOf(
-        Movie("Солдаты-зомби",2021,75F),
-        Movie("Гнев человеческий",2021,78F),
-        Movie("Война будущего",2021,82F),
-        Movie("Токийские мстители",2021,89F),
-        Movie("Хищные птицы: Потрясающая история Харли Квинн",2020,71F)
+        Movie(436969, LANGUAGE_ENGLISH,"Отряд самоубийц: Миссия навылет", "2021", 81F),
+        Movie(451048, LANGUAGE_ENGLISH,"Круиз по джунглям", "2021", 79F),
+        Movie(706972, LANGUAGE_ENGLISH,"Война наркокортелей", "2021", 25F),
+        Movie(550988, LANGUAGE_ENGLISH,"Главный герой", "2021", 79F),
+        Movie(379686, LANGUAGE_ENGLISH,"Космический джем: Новое поколение", "2021", 75F)
 )
 
 fun getRussianMovies() = listOf(
-        Movie("Брат",1997,82F),
-        Movie("Брат 2", 2000, 81F),
-        Movie("Маша и медведь", 2009, 72F),
-        Movie("Легенда №17", 2012,80F),
-        Movie("Бригада", 2002,83F)
+        Movie(529106, LANGUAGE_RUSSIAN,"Майор Гром: Чумной Доктор", "2021", 69F),
+        Movie(575088, LANGUAGE_RUSSIAN,"Яга. Кошмар тёмного леса", "2020", 60F),
+        Movie(797394, LANGUAGE_RUSSIAN,"Гензель, Греттель и Агенство Магии", "2021", 72F),
+        Movie(574982, LANGUAGE_RUSSIAN,"Аванпост", "2019", 65F),
+        Movie(594718, LANGUAGE_RUSSIAN,"Спутник", "2020", 65F)
 )
 
 fun getDefaultName() = "NoNameMovie"
-fun getDefaultDate() = -1
+
