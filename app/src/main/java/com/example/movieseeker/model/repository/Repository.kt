@@ -3,6 +3,7 @@ package com.example.movieseeker.model.repository
 import com.example.movieseeker.model.entities.Movie
 
 interface Repository {
-    fun getMovieFromServer(): Movie
-    fun getMovieFromLocalStorage(): Movie
+    fun getMovieFromServer(id : Int, language : String): Movie
+    fun getMovieFromLocalStorageWorld(): List<Movie>
+    fun getMovieFromLocalStorageRus(): List<Movie>
 }

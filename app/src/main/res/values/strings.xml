@@ -9,5 +9,9 @@
     <string name="favourites_button">favourites</string>
     <string name="ratings_button">ratings</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="change_movies_list_floating_button">change_movies_list</string>
+    <string name="production_year">Production year</string>
+    <string name="snackbar_error">Error!</string>
+    <string name="snackbar_reload">Reload</string>
+    <string name="oops_error_occured">OOPS! Error Occured!</string>
 </resources>

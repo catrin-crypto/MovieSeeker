@@ -1,5 +1,6 @@
 package com.example.movieseeker.di
 
+import com.example.movieseeker.framework.ui.details.DetailsViewModel
 import com.example.movieseeker.framework.ui.main.MainViewModel
 import com.example.movieseeker.model.repository.Repository
 import com.example.movieseeker.model.repository.RepositoryImpl
@@ -11,4 +12,5 @@ val appModule = module {
 
     //View models
     viewModel { MainViewModel(get()) }
+    viewModel { DetailsViewModel(get()) }
 }
