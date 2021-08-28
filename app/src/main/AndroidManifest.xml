@@ -2,16 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.movieseeker">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".framework.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MovieSeeker"
-        android:name=".framework.App">
+        android:theme="@style/Theme.MovieSeeker">
+        <service
+            android:name=".framework.services.DetailIntentService"
+            android:exported="false"></service>
+
+        <receiver
+            android:name=".framework.receivers.MainBroadcastReceiver"
+            android:enabled="true"></receiver>
         <activity
             android:name=".framework.ui.MainActivity"
             android:exported="true">
