@@ -32,15 +32,17 @@ class RepositoryImpl : Repository {
 
 
         }
-         val movie = if (movieDetail?.posterImage != null) Movie(
-                id = movieDetail!!.id,
-                rating = movieDetail!!.voteAverage,
+        movieDetail?.let{
+
+          return   Movie(
+                id = it.id,
+                rating = it.voteAverage,
                 language = language,
-                name = movieDetail!!.title,
-                picture = TmdbImageUrlBuilder.build(image = movieDetail!!.posterImage!!, width = 200, height = 300),
+                name = it.title,
+                picture = it.posterImage?.let{TmdbImageUrlBuilder.build(image = it, width = 200, height = 300)},
                 creationDate = "date")
-            else Movie()
-           return movie
+         }
+        return Movie()
     }
 
     override fun getMovieFromLocalStorageWorld() = getWorldMovies()
