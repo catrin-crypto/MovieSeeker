@@ -9,6 +9,7 @@ import com.example.movieseeker.AppState
 import com.example.movieseeker.R
 import com.example.movieseeker.databinding.FragmentMovieDetailsBinding
 import com.example.movieseeker.model.entities.Movie
+import com.squareup.picasso.Picasso
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -55,7 +56,9 @@ class MovieDetailsFragment : Fragment() {
                             loadingLayout.visibility = View.GONE
                             mainView.visibility = View.VISIBLE
                             movieName.text = appState.movieData[0].name
+                            appState.movieData[0].picture?.let{Picasso.get().load(it).into(moviePicture)}
                             movieRating.text = appState.movieData[0].rating.format(1)
+                            creationYear.text = appState.movieData[0].creationDate
                          }
                     }
                 })
