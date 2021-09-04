@@ -14,4 +14,6 @@
     <string name="snackbar_error">Error!</string>
     <string name="snackbar_reload">Reload</string>
     <string name="oops_error_occured">OOPS! Error Occured!</string>
+    <string name="default_movie_name">No name movie</string>
+    <string name="recent_history_item_menu">recent history</string>
 </resources>
