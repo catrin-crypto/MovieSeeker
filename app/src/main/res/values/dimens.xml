@@ -9,4 +9,7 @@
     <dimen name="image_width">1000dp</dimen>
     <dimen name="image_height">500dp</dimen>
     <dimen name="fab_size">57dp</dimen>
+    <dimen name="item_divider_height">1dp</dimen>
+    <dimen name="item_divider_margin_top">5dp</dimen>
+    <dimen name="movie_name_margin_start">5dp</dimen>
 </resources>

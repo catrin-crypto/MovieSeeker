@@ -1,20 +1,17 @@
 package com.example.movieseeker.model.repository
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
-import app.moviebase.tmdb.Tmdb3
 import app.moviebase.tmdb.image.TmdbImage
 import app.moviebase.tmdb.image.TmdbImageType
 import app.moviebase.tmdb.image.TmdbImageUrlBuilder
-import app.moviebase.tmdb.model.AppendResponse
-import app.moviebase.tmdb.model.TmdbMovieDetail
 import com.example.movieseeker.R
+import com.example.movieseeker.model.database.Database
+import com.example.movieseeker.model.database.HistoryEntity
 import com.example.movieseeker.model.entities.Movie
 import com.example.movieseeker.model.entities.getRussianMovies
 import com.example.movieseeker.model.entities.getWorldMovies
 import com.example.movieseeker.model.rest.MovieRepo
-import kotlinx.coroutines.runBlocking
 
 
 class RepositoryImpl : Repository {
@@ -72,5 +69,23 @@ class RepositoryImpl : Repository {
     override fun getMovieFromLocalStorageWorld() = getWorldMovies()
 
     override fun getMovieFromLocalStorageRus() = getRussianMovies()
+
+    override fun getAllHistory(): List<Movie> =
+        convertHistoryEntityToMovie(Database.db.historyDao().all())
+
+
+    override fun saveEntity(movie: Movie) {
+        Database.db.historyDao().insert(convertMovieToEntity(movie))
+    }
+
+    private fun convertHistoryEntityToMovie(entityList: List<HistoryEntity>): List<Movie> =
+        entityList.map {
+            Movie(it.id,it.language,it.name,it.creationDate,it.rating,it.picture)
+        }
+
+
+    private fun convertMovieToEntity(movie: Movie): HistoryEntity =
+        HistoryEntity(movie.id,movie.language,movie.name,movie.creationDate?: "",movie.rating,movie.picture
+        )
 
 }

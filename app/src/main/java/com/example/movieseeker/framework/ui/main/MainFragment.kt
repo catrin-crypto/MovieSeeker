@@ -1,6 +1,8 @@
 package com.example.movieseeker.framework.ui.main
 
 
+
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -12,6 +14,8 @@ import com.example.movieseeker.framework.ui.adapters.MainFragmentAdapter
 import com.example.movieseeker.framework.ui.showSnackBar
 import com.example.movieseeker.model.entities.Movie
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
+private const val IS_RUS_SET  = "IS_RUS_SET"
 
 class MainFragment : Fragment() {
     private val viewModel : MainViewModel by viewModel()
@@ -30,17 +34,29 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        activity?.let {
+            if (it.getPreferences(Context.MODE_PRIVATE).getBoolean(IS_RUS_SET, false))
+                isDataSetRus = true
+            else
+                isDataSetRus = false
+        }
         with(binding){
             mainFragmentRecyclerView.adapter = adapter
             mainFragmentFAB.setOnClickListener{changeMovieDataSet()}
             viewModel.getLiveData().observe(viewLifecycleOwner,{ renderData(it)})
-            viewModel.getMovieFromLocalSourceRus()
+            if (isDataSetRus) {
+                mainFragmentFAB.setImageResource(R.drawable.ic_russia)
+                viewModel.getMovieFromLocalSourceRus()
+            }
+            else {
+                mainFragmentFAB.setImageResource(R.drawable.ic_earth)
+                viewModel.getMovieFromLocalSourceWorld()
+            }
         }
 
     }
 
-    override fun onDestroyView() {
+    override fun onDestroyView()  {
         super.onDestroyView()
         _binding = null
     }
@@ -54,7 +70,19 @@ class MainFragment : Fragment() {
             mainFragmentFAB.setImageResource(R.drawable.ic_russia)
         }
         isDataSetRus = !isDataSetRus
+
+        saveSetLanguage(isDataSetRus)
     }
+
+    private fun saveSetLanguage(isSetWorld: Boolean) {
+        activity?.let {
+            with(it.getPreferences(Context.MODE_PRIVATE).edit()) {
+                putBoolean(IS_RUS_SET, isSetWorld)
+                apply()
+            }
+        }
+    }
+
 
     private fun renderData(appState: AppState) = with(binding) {
         when (appState) {

@@ -15,6 +15,7 @@ class DetailsViewModel(private val repository: Repository) : ViewModel(), Lifecy
         liveDataToObserve.value = AppState.Loading
         Thread {
             val data = repository.getMovieFromServer(id,language)
+            repository.saveEntity(data)
             liveDataToObserve.postValue(AppState.Success(listOf(data)))
         }.start()
     }
