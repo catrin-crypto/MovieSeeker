@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.example.movieseeker.R
+import com.example.movieseeker.framework.ui.contacts.ContactsFragment
 import com.example.movieseeker.framework.ui.history.HistoryFragment
 import com.example.movieseeker.framework.ui.main.MainFragment
 
@@ -35,6 +36,10 @@ override fun onCreateOptionsMenu(menu: Menu?) : Boolean{
                 openFragment(HistoryFragment.newInstance())
                 true
             }
+            R.id.menu_contacts -> {
+                openFragment(ContactsFragment.newInstance())
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -42,7 +47,7 @@ override fun onCreateOptionsMenu(menu: Menu?) : Boolean{
     private fun openFragment(fragment: Fragment) {
         supportFragmentManager.apply {
             beginTransaction()
-                .add(R.id.container, fragment)
+                .replace(R.id.container, fragment)
                 .addToBackStack("")
                 .commitAllowingStateLoss()
         }

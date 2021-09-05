@@ -10,6 +10,7 @@ import com.example.movieseeker.AppState
 import com.example.movieseeker.R
 import com.example.movieseeker.databinding.MainFragmentBinding
 import com.example.movieseeker.framework.ui.details.MovieDetailsFragment
+import com.example.movieseeker.framework.ui.adapters.ContactsFragmentAdapter
 import com.example.movieseeker.framework.ui.adapters.MainFragmentAdapter
 import com.example.movieseeker.framework.ui.showSnackBar
 import com.example.movieseeker.model.entities.Movie

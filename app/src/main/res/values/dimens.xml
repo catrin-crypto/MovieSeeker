@@ -12,4 +12,5 @@
     <dimen name="item_divider_height">1dp</dimen>
     <dimen name="item_divider_margin_top">5dp</dimen>
     <dimen name="movie_name_margin_start">5dp</dimen>
+    <dimen name="contacts_container_padding">15dp</dimen>
 </resources>
