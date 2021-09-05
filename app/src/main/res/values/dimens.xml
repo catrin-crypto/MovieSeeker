@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="button_text_size">18sp</dimen>
+    <dimen name="button_text_size">15sp</dimen>
+    <dimen name="movie_name_margin_top">10dp</dimen>
+    <dimen name="movie_name_text_size">30sp</dimen>
+    <dimen name="image_margin_top">5dp</dimen>
+    <dimen name="creation_year_margin_top">10dp</dimen>
+    <dimen name="movie_details_textsize">10sp</dimen>
+    <dimen name="image_width">1000dp</dimen>
+    <dimen name="image_height">500dp</dimen>
+    <dimen name="fab_size">57dp</dimen>
+    <dimen name="item_divider_height">1dp</dimen>
+    <dimen name="item_divider_margin_top">5dp</dimen>
+    <dimen name="movie_name_margin_start">5dp</dimen>
+    <dimen name="contacts_container_padding">15dp</dimen>
 </resources>
