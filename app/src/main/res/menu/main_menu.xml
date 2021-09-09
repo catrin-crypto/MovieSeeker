@@ -21,6 +21,11 @@
         android:title="@string/contacts_menu_item"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/menu_google_maps"
+        android:icon="@android:drawable/ic_dialog_map"
+        android:title="@string/map_menu_item"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/action_favorite"
         android:icon="@android:drawable/btn_star_big_on"
         android:orderInCategory="20"

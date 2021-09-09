@@ -50,6 +50,8 @@ dependencies {
     //compile group: 'com.github.holgerbrandl', name: 'themoviedbapi', version:'1.12'
     //HTTP Engine
     implementation("io.ktor:ktor-client-cio:1.6.2")
+    //google-maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.1'
 
     //tmdb-api
     implementation("app.moviebase:tmdb-api:0.5.0")

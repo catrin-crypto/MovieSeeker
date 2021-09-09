@@ -9,6 +9,7 @@ import com.example.movieseeker.R
 import com.example.movieseeker.framework.ui.contacts.ContactsFragment
 import com.example.movieseeker.framework.ui.history.HistoryFragment
 import com.example.movieseeker.framework.ui.main.MainFragment
+import com.example.movieseeker.framework.ui.maps.MapsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +39,10 @@ override fun onCreateOptionsMenu(menu: Menu?) : Boolean{
             }
             R.id.menu_contacts -> {
                 openFragment(ContactsFragment.newInstance())
+                true
+            }
+            R.id.menu_google_maps -> {
+                openFragment(MapsFragment.newInstance())
                 true
             }
             else -> super.onOptionsItemSelected(item)

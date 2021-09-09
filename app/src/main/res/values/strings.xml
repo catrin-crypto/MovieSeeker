@@ -18,4 +18,14 @@
     <string name="contacts_menu_item">contacts</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ask_permission">Please permit access to your contacts</string>
+    <string name="please_enter_address_maps">Please enter address</string>
+    <string name="start">start</string>
+    <string name="long_click">From long click</string>
+    <string name="map_menu_item">MAP</string>
+    <string name="map_mode">Map mode</string>
+    <string name="normal">normal</string>
+    <string name="satellites">satellites</string>
+    <string name="terrain">terrain</string>
+    <string name="traffic">traffic</string>
+    <string name="need_permissions_to_find_location">Need permission to find location</string>
 </resources>
