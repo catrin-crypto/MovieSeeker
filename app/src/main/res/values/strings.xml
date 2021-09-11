@@ -28,4 +28,5 @@
     <string name="terrain">terrain</string>
     <string name="traffic">traffic</string>
     <string name="need_permissions_to_find_location">Need permission to find location</string>
+    <string name="default_address">Москва, Красная площадь 1</string>
 </resources>

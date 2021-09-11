@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import android.widget.Toast.*
 import androidx.fragment.app.Fragment
 import com.example.movieseeker.R
 import com.example.movieseeker.framework.ui.contacts.ContactsFragment
@@ -22,6 +24,9 @@ class MainActivity : AppCompatActivity() {
                     .replace(R.id.container, MainFragment.newInstance())
                     .commitNow()
         }
+
+        val string = intent.extras?.getString("custom", "no data") ?: "no data"
+        makeText(this, string, LENGTH_SHORT).show()
     }
 
 override fun onCreateOptionsMenu(menu: Menu?) : Boolean{
