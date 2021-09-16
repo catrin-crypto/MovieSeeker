@@ -45,58 +45,11 @@
         android:layout_marginBottom="16dp"
         app:maxImageSize="@dimen/fab_size"
         android:src="@drawable/ic_russia"
-        app:layout_constraintBottom_toTopOf="@id/button_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@null"
         android:contentDescription="@string/change_movies_list_floating_button" />
 
-     <LinearLayout
-        android:id="@+id/button_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-        <Button
-            android:id="@+id/home_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/design_default_color_secondary"
-            android:text="@string/home"
-            android:textColor="@color/white"
-            android:textSize="@dimen/button_text_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/favourites_button"
-            />
 
-        <Button
-            android:id="@+id/favourites_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/design_default_color_secondary"
-            android:text="@string/favourites_button"
-            android:textColor="@color/white"
-            android:textSize="@dimen/button_text_size"
-            app:layout_constraintStart_toEndOf="@id/home_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ratings_button"
-            />
-
-        <Button
-            android:id="@+id/ratings_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/design_default_color_secondary"
-            android:text="@string/ratings_button"
-            android:textColor="@color/white"
-            android:textSize="@dimen/button_text_size"
-            app:layout_constraintStart_toEndOf="@id/favourites_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,18 +7,21 @@ import android.view.MenuItem
 import android.widget.Toast
 import android.widget.Toast.*
 import androidx.fragment.app.Fragment
+import com.example.movieseeker.BuildConfig
 import com.example.movieseeker.R
+import com.example.movieseeker.databinding.MainActivityBinding
 import com.example.movieseeker.framework.ui.contacts.ContactsFragment
 import com.example.movieseeker.framework.ui.history.HistoryFragment
 import com.example.movieseeker.framework.ui.main.MainFragment
 import com.example.movieseeker.framework.ui.maps.MapsFragment
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var binding : MainActivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.main_activity)
+        binding = MainActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.textActivity.text = BuildConfig.BUILD_TYPE
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                     .replace(R.id.container, MainFragment.newInstance())
